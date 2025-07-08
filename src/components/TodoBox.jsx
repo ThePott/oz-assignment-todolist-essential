@@ -3,7 +3,7 @@ import { useTodolistContext } from "../hooks"
 
 const TodoBox = React.memo(
   ({ todo, isUpdating }) => {
-    const { setTodoJson, putTodo, deleteTodo, setUpdatingTodo } = useTodolistContext()
+    const { setTodoJson, setUpdatingTodo } = useTodolistContext()
 
     const toggleIsDone = () => {
       setTodoJson((prev) => {
@@ -12,8 +12,6 @@ const TodoBox = React.memo(
         targetTodo.isDone = !targetTodo.isDone
         return copiedArray
       })
-
-      putTodo(todo)
     }
 
     const handleDelete = () => {
@@ -21,8 +19,6 @@ const TodoBox = React.memo(
         const filteredArray = prev.filter((el) => el.id !== todo.id)
         return filteredArray
       })
-
-      deleteTodo(todo)
     }
 
     const toggleUpdate = () => {

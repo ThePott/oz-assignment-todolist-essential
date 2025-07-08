@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useTodolistContext } from '../hooks'
 
 const TodoInput = ({ updatingTodo }) => {
-  const { setTodoJson, postTodo, putTodo, setUpdatingTodo } = useTodolistContext()
+  const { setTodoJson, setUpdatingTodo } = useTodolistContext()
   const inputRef = useRef(null)
 
   // 인풋의 초깃값 설정
@@ -19,9 +19,6 @@ const TodoInput = ({ updatingTodo }) => {
     const newWhat = inputRef.current.value
 
     if (updatingTodo) {
-      const copiedTodo = { ...updatingTodo }
-      copiedTodo.what = newWhat
-      putTodo(copiedTodo)
 
       setTodoJson((prev) => {
         const copiedArray = [...prev]
@@ -33,12 +30,6 @@ const TodoInput = ({ updatingTodo }) => {
 
       setUpdatingTodo(null)
     } else {
-      const todo = {
-        id: Number(new Date()),
-        what: newWhat,
-        isDone: false
-      }
-      postTodo(todo)
       setTodoJson((prev) => [...prev, todo])
     }
 

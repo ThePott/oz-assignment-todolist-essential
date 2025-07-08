@@ -7,13 +7,14 @@ import { TodolistContext, useTodoApi, useQuoteApi } from "./hooks"
 
 
 const App = () => {
+  // const 
   const [updatingTodo, setUpdatingTodo] = useState(null)
 
   const { quoteJson } = useQuoteApi()
-  const { todoJson, setTodoJson, putTodo, deleteTodo, postTodo } = useTodoApi()
+  const { todoJson, setTodoJson } = useTodoApi()
   
   return (
-    <TodolistContext.Provider value={{setTodoJson, putTodo, deleteTodo, postTodo, updatingTodo, setUpdatingTodo}}>
+    <TodolistContext.Provider value={{setTodoJson, updatingTodo, setUpdatingTodo}}>
       <div className="app-boundary">
         <Colock />
         <Quote quoteJson={quoteJson}  />
