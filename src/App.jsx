@@ -1,3 +1,4 @@
+import { useState } from "react"
 import Quote from "./components/Quote"
 import Timer from "./components/Timer"
 import TodoInput from "./components/TodoInput"
@@ -6,12 +7,16 @@ import { TodolistContext, useApi } from "./hooks"
 
 
 const App = () => {
+  const [updatingTodo, setUpdatingTodo] = useState(null)
+
   const { responseJson: quoteJson, responseStatus: quoteStatus } = useApi("QUOTE")
   const { responseJson: todoJson, setResponseJson: setTodoJson, responseStatus: todoStatus, putTodo, deleteTodo, postTodo } = useApi("TODO")
   // console.log("---- put todo, delete todo:", putTodo, deleteTodo)
 
+  
+
   return (
-    <TodolistContext.Provider value={{setTodoJson, putTodo, deleteTodo, postTodo}}>
+    <TodolistContext.Provider value={{setTodoJson, putTodo, deleteTodo, postTodo, updatingTodo, setUpdatingTodo}}>
       <div className="app-boundary">
         <Timer />
         <Quote quoteJson={quoteJson} quoteStatus={quoteStatus} />

@@ -57,6 +57,9 @@ div.todo {
   gap: 8px;
   align-items: center;
 }
+div.todo.updating {
+  background-color: yellow;
+}
 
 div.todo input[type="checkbox"] {
   width: 36px;
@@ -93,5 +96,4 @@ div.todo-input-section input {
 
 div.todo-input-section button {
   padding: 12px;
-  margin : 
 }

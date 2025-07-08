@@ -1,5 +1,6 @@
 import Divider from './Divider'
 import TodoBox from "./TodoBox"
+import { useTodolistContext } from "../hooks"
 
 const TodoSkeleton = () => {
   return (
@@ -14,16 +15,21 @@ const TodoSkeleton = () => {
 const TodoMany = ({ todoArray }) => {
   if (!todoArray || todoArray.length === 0) { return null }
 
+  const { updatingTodo } = useTodolistContext()
+
+  const isUpdatingArray = updatingTodo ? todoArray.map((todo) => todo.id === updatingTodo.id) : todoArray.map(() => false)
+
   return (
     <>
       <Divider />
-      {todoArray.map((todo) => <TodoBox key={todo.id} todo={todo} />)}
+      {todoArray.map((todo, index) => <TodoBox key={todo.id} todo={todo} isUpdating={isUpdatingArray[index]} />)}
     </>
   )
 }
 
 const TodoSection = ({ todoJson }) => {
   if (!todoJson) { return <TodoSkeleton /> }
+
 
   const groupedOjbect = Object.groupBy(
     todoJson,
