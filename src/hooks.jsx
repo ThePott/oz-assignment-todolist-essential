@@ -70,9 +70,31 @@ const requestPut = async (baseUrl, todo) => {
 }
 
 // ==== PURPOSE SPECIFIC API CUSTOM HOOK
+const todoApiReducer = (state, action) => {
+    const copiedState = state ? [...state] : []
+    switch (action.type) {
+        case "SET":
+            return action.todoJson
+        case "UPDATE_WHAT":
+            const targetTodoWhat = copiedState.find((todo) => todo.id === action.todo.id)
+            targetTodoWhat.what = action.todo.what
+            return copiedState
+        case "TOGGLE_IS_DONE":
+            const targetTodoDone = copiedState.find((todo) => todo.id === action.todo.id)
+            targetTodoDone.isDone = !targetTodoDone.isDone
+            return copiedState
+        case "DELETE":
+            const filteredArray = copiedState.filter((todo) => todo.id !== action.todo.id)
+            return filteredArray
+        default:
+            return state
+    }
+}
 const useTodoApi = () => {
     const url = "http://localhost:3000/todo"
-    const [todoJson, setTodoJson] = useState(null)
+    const [todoJson, todoApiDispatch] = useReducer(todoApiReducer, null)
+
+    const setTodoJson = (todoJson) => todoApiDispatch({type: "SET", todoJson})
 
     useEffect(
         () => {
@@ -87,7 +109,7 @@ const useTodoApi = () => {
 
     const postTodo = useCallback((todo) => { requestPost(url, todo) }, [])
 
-    return { todoJson, setTodoJson, putTodo, deleteTodo, postTodo }
+    return { todoJson, todoApiDispatch, putTodo, deleteTodo, postTodo }
 
 }
 

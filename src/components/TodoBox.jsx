@@ -3,26 +3,18 @@ import { useTodolistContext } from "../hooks"
 
 const TodoBox = React.memo(
   ({ todo, isUpdating }) => {
-    const { setTodoJson, updatingTodoDispatch } = useTodolistContext()
+    const { todoApiDispatch, updatingTodoDispatch } = useTodolistContext()
 
     const toggleIsDone = () => {
-      setTodoJson((prev) => {
-        const copiedArray = [...prev]
-        const targetTodo = copiedArray.find((el) => el.id === todo.id)
-        targetTodo.isDone = !targetTodo.isDone
-        return copiedArray
-      })
+      todoApiDispatch({ type: "TOGGLE_IS_DONE", todo})
     }
 
     const handleDelete = () => {
-      setTodoJson((prev) => {
-        const filteredArray = prev.filter((el) => el.id !== todo.id)
-        return filteredArray
-      })
+      todoApiDispatch({type: "DELETE", todo})
     }
 
     const toggleUpdate = () => {
-      updatingTodoDispatch({type: "TOGGLE_UPDATE", todo})
+      updatingTodoDispatch({ type: "TOGGLE_UPDATE", todo })
     }
 
     return (
