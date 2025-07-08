@@ -2,7 +2,8 @@ import { useRef } from 'react'
 import { useTodolistContext } from '../hooks'
 
 const TodoInput = ({ updatingTodo }) => {
-  const { setTodoJson, setUpdatingTodo } = useTodolistContext()
+  // const { setTodoJson } = useTodolistContext() // <---- 둘 다 지워야
+  const { updatingTodoDispatch, todoApiDispatch } = useTodolistContext()
   const inputRef = useRef(null)
 
   // 인풋의 초깃값 설정
@@ -16,21 +17,18 @@ const TodoInput = ({ updatingTodo }) => {
   const submitTodo = () => {
     if (!inputRef || !inputRef.current) { return }
 
-    const newWhat = inputRef.current.value
+    const what = inputRef.current.value
 
     if (updatingTodo) {
 
-      setTodoJson((prev) => {
-        const copiedArray = [...prev]
-        const todo = copiedArray.find((el) => el.id === updatingTodo.id)
-        if (!todo) { return prev }
-        todo.what = newWhat
-        return copiedArray
-      })
+      const copiedTodo = { ...updatingTodo }
+      copiedTodo.what = what
+      todoApiDispatch({ type: "UPDATE", todo: updatingTodo })
+      updatingTodoDispatch({ type: "RESET" })
 
-      updatingTodoDispatch({type: "RESET"})
     } else {
-      setTodoJson((prev) => [...prev, todo])
+
+      todoApiDispatch({type: "POST", what})
     }
 
     inputRef.current.value = ""

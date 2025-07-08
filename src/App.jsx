@@ -9,10 +9,12 @@ import { TodolistContext, useQuoteApi, useTodoApi, useTodoUpdate } from "./hooks
 const App = () => {
   const { updatingTodo, updatingTodoDispatch } = useTodoUpdate()
   const { quoteJson } = useQuoteApi()
-  const { todoJson, setTodoJson, todoApiDispatch } = useTodoApi()
+  const { todoJson, todoApiDispatch } = useTodoApi()
+
+
 
   return (
-    <TodolistContext.Provider value={{ setTodoJson, todoApiDispatch, updatingTodo, updatingTodoDispatch }}>
+    <TodolistContext.Provider value={{ todoApiDispatch, updatingTodo, updatingTodoDispatch }}>
       <div className="container">
         {updatingTodo && <EditModal />}
         <div className={`app-boundary ${updatingTodo ? "blur" : ""}`}>

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { useTodolistContext } from "../hooks"
 
 const EditModal = () => {
@@ -15,11 +15,14 @@ const EditModal = () => {
     copiedTodo.what = inputRef.current.value
     todoApiDispatch({type: "UPDATE_WHAT", todo: copiedTodo})
     updatingTodoDispatch({type: "RESET"})
+  }
 
+  const cancelChange = () => {
+    updatingTodoDispatch({type: "RESET"})
   }
 
   return (
-    <div className='modal-background'>
+    <div className='modal-background' onClick={cancelChange}>
       <input type="text" ref={inputRef} onKeyDown={submitChange} />
     </div>
   )

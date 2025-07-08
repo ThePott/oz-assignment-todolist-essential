@@ -6,23 +6,25 @@ import { getRegExp } from "korean-regexp"
 const TodoSkeleton = () => {
   return (
     <>
-      <div className="todo">skeleton</div>
-      <div className="todo"></div>
-      <div className="todo"></div>
+      <input className="search" type="text" />
+      <div className='todo-section'>
+        <TodoMany todoArray={[]} />
+        <TodoMany todoArray={[]} />
+      </div>
     </>
   )
 }
 
 const TodoMany = ({ todoArray }) => {
-  if (!todoArray || todoArray.length === 0) { return <div className="todo-many"></div> }
-
   const { updatingTodo } = useTodolistContext()
 
-  const isUpdatingArray = todoArray.map((todo) => updatingTodo ? todo.id === updatingTodo.id : false)
+  const unwarppedArray = todoArray ?? []
+
+  const isUpdatingArray = unwarppedArray.map((todo) => updatingTodo ? todo.id === updatingTodo.id : false)
 
   return (
     <div className="todo-many">
-      {todoArray.map((todo, index) => <TodoBox key={todo.id} todo={todo} isUpdating={isUpdatingArray[index]} />)}
+      {unwarppedArray.map((todo, index) => <TodoBox key={todo.id} todo={todo} isUpdating={isUpdatingArray[index]} />)}
     </div>
   )
 }
@@ -34,9 +36,8 @@ const TodoSection = ({ todoJson }) => {
 
   const { searchText, searchTextDispatch } = useSearch()
   const regexp = getRegExp(searchText)
+  console.log("---- todo json:", todoJson)
   const filteredArray = todoJson.filter((todo) => todo.what.match(regexp))
-  // console.log("---- filtered array:", filteredArray.length, searchText)
-  // console.log("---- search text:", searchText)
 
   const groupedOjbect = Object.groupBy(
     filteredArray,

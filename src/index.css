@@ -173,6 +173,7 @@ div.todo {
   align-items: center;
   border: 1px solid hsl(0 0 30);
   border-radius: 8px;
+  height: 48px;
 }
 div.todo.updating {
   background-color: hsl(0 0 30);
@@ -192,6 +193,7 @@ div.todo-input-section {
   
   display: flex;
   gap: 12px;
+  height: 48px;
 }
 div.todo-input-section input {
   flex-grow: 1;

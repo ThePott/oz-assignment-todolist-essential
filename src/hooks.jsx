@@ -86,6 +86,14 @@ const todoApiReducer = (state, action) => {
         case "DELETE":
             const filteredArray = copiedState.filter((todo) => todo.id !== action.todo.id)
             return filteredArray
+        case "POST":
+            console.log("---- posting:", action.what)
+            const todo = {
+                id: Number(new Date()),
+                what: action.what,
+                isDone: false
+            }
+            return [...copiedState, todo]
         default:
             return state
     }
@@ -94,14 +102,26 @@ const useTodoApi = () => {
     const url = "http://localhost:3000/todo"
     const [todoJson, todoApiDispatch] = useReducer(todoApiReducer, null)
 
-    const setTodoJson = (todoJson) => todoApiDispatch({type: "SET", todoJson})
+    // const setTodoJson = (todoJson) => todoApiDispatch({ type: "SET", todoJson })
+    
+    useEffect(
+        () => {
+            if (!todoJson) { return }
+            localStorage.setItem("todoJson", JSON.stringify(todoJson))
+        },
+        [todoJson]
+    )
 
     useEffect(
         () => {
-            requestGet(url, setTodoJson)
+            // requestGet(url, setTodoJson)
+            const jsonInString = localStorage.getItem("todoJson")
+            const json = JSON.parse(jsonInString)
+            todoApiDispatch({type: "SET", todoJson: json})
         },
         []
     )
+
 
     const putTodo = useCallback((todo) => { requestPut(url, todo) }, [])
 
