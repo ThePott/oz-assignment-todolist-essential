@@ -26,7 +26,6 @@ const TodoBox = React.memo(
     }
 
     const toggleUpdate = () => {
-      console.log("---- clicked!")
       setUpdatingTodo(
         (prev) => {
           if (!prev) { return todo }

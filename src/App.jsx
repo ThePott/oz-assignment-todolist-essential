@@ -21,7 +21,7 @@ const App = () => {
         <Timer />
         <Quote quoteJson={quoteJson} quoteStatus={quoteStatus} />
         <TodoSection todoJson={todoJson} />
-        <TodoInput />
+        <TodoInput updatingTodo={updatingTodo} />
       </div>
     </TodolistContext.Provider>
   )
