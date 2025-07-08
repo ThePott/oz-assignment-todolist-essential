@@ -10,21 +10,37 @@
   font-weight: 400;
 
   color-scheme: only dark;
+  color: hsl(0 0 90);
+  background-color: hsl(0 0 0);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  line-height: 1;
+}
+
+div#root {
+  height: 100vh;
+  width: 100vw;;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 div.app-boundary {
-  background-color: coral;
-  max-width: 400px;
+  background-color: hsl(0 0 10);
+  max-width: 1280px;
   width: 100%;
-  margin: auto;
+  flex-grow: 1;
+
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  margin: 48px 0;
   padding: 24px;
   border-radius: 24px;
 
@@ -33,67 +49,117 @@ div.app-boundary {
 
 div.divider {
   height: 1px;
-  background-color: hsl(0 0 60);
+  background-color: hsl(0 0 30);
+}
+div.divider.vertical {
+  height: 100%;
+  width: 1px;
 }
 
+button {
+  border: none;
+  background-color: hsl(0 0 40);
+  align-self: stretch;
+  padding: 0 12px;
+  border-radius: 8px;
+}
+button:hover {
+  background-color: hsl(0 0 25);
+}
+button:active {
+  background-color: hsl(0 0 10);
+}
+
+
 div.clock {
-  height: 100px;
-  background-color: lightblue;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  align-items: end;
+}
+div.clock div:first-child {
+  font-size: 24px;
 }
 div.clock div:last-child {
-  font-size: 50px;
+  font-size: 30px;
 }
 
 div.quote-template {
   min-height: 100px;
-  background-color: lightgreen;
-  padding: 12px;;
+  padding: 12px;
+  line-height: 1.5;
+}
+div.quote-template h2 {
+  font-weight: 500;
+  font-size: 20px;
+}
+div.quote-template p {
+  font-weight: 600;
+  font-size: 20px;
+  text-align: right;
 }
 
+
+div.todo-section {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  gap: 24px;
+  position: relative;
+}
+div.todo-section div.todo-many {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+}
+div.todo-section div.divider.vertical {
+  position: absolute;
+  left: 50%;
+}
+
+
 div.todo {
-  background-color: lightseagreen;
   padding: 8px;
   display: flex;
   gap: 8px;
   align-items: center;
+  border: 1px solid hsl(0 0 30);
+  border-radius: 8px;
 }
 div.todo.updating {
-  background-color: yellow;
+  background-color: hsl(0 0 30);
+}
+
+div.todo p {
+  flex-grow: 1;
 }
 
 div.todo input[type="checkbox"] {
   width: 36px;
-  height: 36px;;
-  border: none;
-}
-div.todo p {
-  flex-grow: 1;
-}
-div.todo button {
-  border: none;
-  background-color: hsl(0 0 40);
   height: 36px;
-  padding: 0 12px;
-}
-div.todo button:hover {
-  background-color: hsl(0 0 25);
-}
-div.todo button:active {
-  background-color: hsl(0 0 10);
+  border-radius: 24px;
 }
 
 div.todo-input-section {
   height: 48px;
   display: flex;
-  /* gap: 12px; */
-  /* background-color: lightyellow; */
+  gap: 12px;
 }
 div.todo-input-section input {
   flex-grow: 1;
   padding: 8px;
   font-size: 16px;
+
+  background-color: inherit;
+  border: 1px solid hsl(0 0 30);
+  border-radius: 8px;
 }
 
 div.todo-input-section button {
   padding: 12px;
+  border-radius: 8px;
 }

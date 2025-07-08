@@ -1,7 +1,8 @@
 
-const Divider = () => {
+const Divider = ({isVertical}) => {
+
   return (
-    <div className='divider'></div>
+    <div className={`divider ${isVertical ? "vertical" : ""}`}></div>
   )
 }
 

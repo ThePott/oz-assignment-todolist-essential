@@ -17,13 +17,14 @@ const TodoMany = ({ todoArray }) => {
 
   const { updatingTodo } = useTodolistContext()
 
-  const isUpdatingArray = updatingTodo ? todoArray.map((todo) => todo.id === updatingTodo.id) : todoArray.map(() => false)
-
+  const isUpdatingArray = todoArray.map((todo) => updatingTodo ? todo.id === updatingTodo.id : false)
+  if (updatingTodo) {
+  }
   return (
-    <>
-      <Divider />
+    <div className="todo-many">
+      {/* <Divider /> */}
       {todoArray.map((todo, index) => <TodoBox key={todo.id} todo={todo} isUpdating={isUpdatingArray[index]} />)}
-    </>
+    </div>
   )
 }
 
@@ -34,16 +35,16 @@ const TodoSection = ({ todoJson }) => {
     todoJson,
     ({ isDone }) => isDone ? "done" : "notYet"
   )
-  
+
   const doneArray = groupedOjbect["done"]
   const notYetArray = groupedOjbect["notYet"]
 
   return (
-    <>
+    <div className='todo-section'>
       <TodoMany todoArray={notYetArray} />
       <TodoMany todoArray={doneArray} />
-      <Divider />
-    </>
+      <Divider isVertical={true} />
+    </div>
   )
 }
 

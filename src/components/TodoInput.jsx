@@ -50,8 +50,6 @@ const TodoInput = ({ updatingTodo }) => {
 
   return (
     <div className='todo-input-section'>
-      <button onClick={() => { inputRef.current.value = "yaaas" }}>등록</button>
-      <button onClick={() => console.log("---- cur val:", inputRef.current.value)}>ref</button>
       <input ref={inputRef} />
       <button onClick={submitTodo}>{buttonText}</button>
     </div>

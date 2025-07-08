@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const getParsedTime = (date) => {
   const day = date.getDate()
@@ -7,7 +7,12 @@ const getParsedTime = (date) => {
   return { day, hour, minute }
 }
 
-const Timer = () => {
+const twoDigitString = (number) => {
+  if (number < 10) { return `0${number}`}
+  return `${number}`
+}
+
+const Clock = () => {
   // 이거 전체를 useTimer로 빼자
   const [date, setDate] = useState(new Date())
   const { day, hour, minute } = getParsedTime(date)
@@ -27,9 +32,9 @@ const Timer = () => {
   return (
     <div className='clock'>
       <div>{day}일</div>
-      <div>{hour}:{minute}</div>
+      <div>{twoDigitString(hour)}:{twoDigitString(minute)}</div>
     </div>
   )
 }
 
-export default Timer
+export default Clock

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Quote from "./components/Quote"
-import Timer from "./components/Timer"
+import Colock from "./components/Colock"
 import TodoInput from "./components/TodoInput"
 import TodoSection from "./components/TodoSection"
 import { TodolistContext, useTodoApi, useQuoteApi } from "./hooks"
@@ -13,9 +13,9 @@ const App = () => {
   const { todoJson, setTodoJson, putTodo, deleteTodo, postTodo } = useTodoApi()
   
   return (
-    <TodolistContext.Provider value={{setTodoJson, putTodo, deleteTodo, postTodo, setUpdatingTodo}}>
+    <TodolistContext.Provider value={{setTodoJson, putTodo, deleteTodo, postTodo, updatingTodo, setUpdatingTodo}}>
       <div className="app-boundary">
-        <Timer />
+        <Colock />
         <Quote quoteJson={quoteJson}  />
         <TodoSection todoJson={todoJson} />
         <TodoInput updatingTodo={updatingTodo} />
