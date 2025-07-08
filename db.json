@@ -1,0 +1,8 @@
+{
+  "todo": [
+    {"what": "밥 먹기", "isDone": false},
+    {"what": "잠 자기", "isDone": false},
+    {"what": "똥 싸기", "isDone": false},
+    {"what": "놀기", "isDone": false}
+  ]
+}
