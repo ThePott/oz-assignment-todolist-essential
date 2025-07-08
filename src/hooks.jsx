@@ -94,6 +94,34 @@ const todoApiReducer = (state, action) => {
                 isDone: false
             }
             return [...copiedState, todo]
+        case "REORDER":
+            const done = action.todo.isDone
+            const groupedObject = Object.groupBy(
+                copiedState,
+                ({isDone}) => isDone === done ? "myGroup" : "notMyGroup"
+            )
+            
+            const myGroup = groupedObject.myGroup
+            const notMyGroup = groupedObject.notMyGroup
+            
+            const indexOffset = Math.round(action.diffY / (12 + 48))
+            const oldIndex = myGroup.findIndex((todo) => todo.id === action.todo.id)
+            const newIndex = Math.min(myGroup.length -1, Math.max(0, oldIndex + indexOffset))
+
+            if (indexOffset === 0) { 
+                return state 
+            }
+
+            if (indexOffset < 0) {
+                myGroup.splice(oldIndex, 1)
+                myGroup.splice(newIndex, 0, action.todo)
+            } else {
+                myGroup.splice(newIndex + 1, 0, action.todo)
+                myGroup.splice(oldIndex, 1)
+            }
+            
+            return [...myGroup, ...notMyGroup]
+
         default:
             return state
     }

@@ -5,9 +5,21 @@ const EditModal = () => {
   const { updatingTodo, todoApiDispatch, updatingTodoDispatch } = useTodolistContext()
   const inputRef = useRef(null)
 
+
+
   if (inputRef && inputRef.current) {
-    inputRef.current.value = updatingTodo.what
+    inputRef.current.value = updatingTodo ? updatingTodo.what : ""
+  } else {
+    setTimeout(
+      () => {inputRef.current.value = updatingTodo ? updatingTodo.what : ""},
+      100
+    )
   }
+  
+  // }
+  // if (inputRef && inputRef.current) {
+  //   inputRef.current.value = updatingTodo.what
+  // }
 
   const submitChange = (event) => {
     if (event.key !== "Enter") { return }
@@ -17,13 +29,13 @@ const EditModal = () => {
     updatingTodoDispatch({type: "RESET"})
   }
 
-  const cancelChange = () => {
+  const cancelChange = (event) => {
     updatingTodoDispatch({type: "RESET"})
   }
 
   return (
     <div className='modal-background' onClick={cancelChange}>
-      <input type="text" ref={inputRef} onKeyDown={submitChange} />
+      <input type="text" ref={inputRef} onKeyDown={submitChange} onClick={(event) => {event.stopPropagation()}} />
     </div>
   )
 }

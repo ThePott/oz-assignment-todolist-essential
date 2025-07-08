@@ -24,7 +24,7 @@ const TodoMany = ({ todoArray }) => {
 
   return (
     <div className="todo-many">
-      {unwarppedArray.map((todo, index) => <TodoBox key={todo.id} todo={todo} isUpdating={isUpdatingArray[index]} />)}
+      {unwarppedArray.map((todo, index) => <TodoBox key={todo.id} data-index={index} todo={todo} isUpdating={isUpdatingArray[index]} />)}
     </div>
   )
 }
@@ -36,7 +36,6 @@ const TodoSection = ({ todoJson }) => {
 
   const { searchText, searchTextDispatch } = useSearch()
   const regexp = getRegExp(searchText)
-  console.log("---- todo json:", todoJson)
   const filteredArray = todoJson.filter((todo) => todo.what.match(regexp))
 
   const groupedOjbect = Object.groupBy(
