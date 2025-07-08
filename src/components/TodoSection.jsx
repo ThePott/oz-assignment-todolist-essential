@@ -30,7 +30,6 @@ const TodoMany = ({ todoArray }) => {
 const TodoSection = ({ todoJson }) => {
   if (!todoJson) { return <TodoSkeleton /> }
 
-
   const groupedOjbect = Object.groupBy(
     todoJson,
     ({ isDone }) => isDone ? "done" : "notYet"

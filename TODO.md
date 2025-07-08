@@ -9,4 +9,10 @@
 
 # 할 것
 1. 코드 정리
+    - quote, todo 구분
+        useQuoteApi / useTodoApi
+    - 로딩, 에러 핸들링, 스켈레톤 삭제
+    
+
+
 2. 레이아웃 정리

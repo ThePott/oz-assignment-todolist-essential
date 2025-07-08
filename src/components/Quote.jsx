@@ -6,9 +6,6 @@ const QuoteTemplate = ({children}) => {
   )
 }
 
-// const QuoteSkeleton = () => {
-//   <QuoteTemplate></QuoteTemplate>
-// }
 
 const Quote = ({quoteJson, quoteStatus}) => {
   if (!quoteJson || quoteStatus === "IS_LOADING") { return <QuoteTemplate /> }

@@ -5,12 +5,13 @@ const TodoInput = ({ updatingTodo }) => {
   const { setTodoJson, postTodo, putTodo, setUpdatingTodo } = useTodolistContext()
   const inputRef = useRef(null)
 
+  // 인풋의 초깃값 설정
   if (updatingTodo) {
-    console.log("--- fill in what to do ")
     inputRef.current.value = updatingTodo.what
   } else if (inputRef && inputRef.current) {
     inputRef.current.value = ""
   }
+
 
   const submitTodo = () => {
     if (!inputRef || !inputRef.current) { return }
@@ -41,9 +42,7 @@ const TodoInput = ({ updatingTodo }) => {
       setTodoJson((prev) => [...prev, todo])
     }
 
-    console.log("---- sumbmitting done. now clear input")
-    // inputRef.current.value = "으랏찻차"
-    inputRef.current.value = "yaaas"
+    inputRef.current.value = ""
   }
 
 

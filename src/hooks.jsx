@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext, createContext, useCallback } from "react"
 
+// ===== CONTEXT =====
 const TodolistContext = createContext(null)
 
 const useTodolistContext = () => {
@@ -10,30 +11,7 @@ const useTodolistContext = () => {
     return context
 }
 
-/** BODY <- JSON */
-const requestApi = async (setResponseJson, setResponseStatus, url, method, body) => {
-    try {
-        setResponseStatus("IS_LOADING")
-
-        const response = await fetch(
-            url,
-            {
-                method,
-                headers: { 'Content-Type': 'application/json', },
-                body: JSON.stringify(body)
-            }
-        )
-
-        const json = await response.json()
-        if (!response.ok) { throw new Error() }
-
-        setResponseJson(json)
-        setResponseStatus("SUCCESS")
-    } catch (error) {
-        setResponseStatus("ERROR")
-    }
-}
-
+// ==== GENERAL API REQUEST ====
 const simpleRequest = async (url, method, body) => {
     const response = await fetch(
         url,
@@ -48,6 +26,7 @@ const simpleRequest = async (url, method, body) => {
         console.log("---- invalid response:", response)
         throw new Error()
     }
+
     const json = await response.json()
     return json
 }
@@ -69,6 +48,15 @@ const requestDelete = async (baseUrl, todo) => {
     }
 }
 
+const requestGet = async (url, setJson) => {
+    try {
+        const json = await simpleRequest(url, "GET")
+        setJson(json)
+    } catch (error) {
+        console.error("---- ERROR:", error)
+    }
+}
+
 const requestPut = async (baseUrl, todo) => {
     try {
         const deleteUrl = `${baseUrl}/${todo.id}`
@@ -81,14 +69,15 @@ const requestPut = async (baseUrl, todo) => {
     }
 }
 
-const useApi = (destination, method = "GET", body = undefined) => {
-    const url = destination === "QUOTE" ? "https://dummyjson.com/quotes/random" : "http://localhost:3000/todo"
-    const [responseJson, setResponseJson] = useState(null)
-    const [responseStatus, setResponseStatus] = useState("IS_LOADING")
-
-    /** 우선 최초 마운트에만 호출, 지켜보고 필요하면 의존성 배열에 더 넣자 */
+// ==== PURPOSE SPECIFIC API CUSTOM HOOK
+const useTodoApi = () => {
+    const url = "http://localhost:3000/todo"
+    const [todoJson, setTodoJson] = useState(null)
+    
     useEffect(
-        () => { requestApi(setResponseJson, setResponseStatus, url, method, body) },
+        () => {
+            requestGet(url, setTodoJson)
+        },
         []
     )
 
@@ -98,8 +87,22 @@ const useApi = (destination, method = "GET", body = undefined) => {
 
     const postTodo = useCallback((todo) => { requestPost(url, todo) }, [])
 
-    return { responseJson, setResponseJson, responseStatus, putTodo, deleteTodo, postTodo }
+    return { todoJson, setTodoJson, putTodo, deleteTodo, postTodo }
 
 }
 
-export { useApi, TodolistContext, useTodolistContext }
+const useQuoteApi = () => {
+    const url = "https://dummyjson.com/quotes/random"
+    const [quoteJson, setQuoteJson] = useState(null)
+    useEffect(
+        () => {
+            requestGet(url, setQuoteJson)
+        },
+        []
+    )
+
+    return { quoteJson }
+}
+
+
+export { useTodoApi, useQuoteApi, TodolistContext, useTodolistContext }
