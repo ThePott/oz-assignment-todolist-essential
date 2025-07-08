@@ -3,7 +3,7 @@ import { useTodolistContext } from "../hooks"
 
 const TodoBox = React.memo(
   ({ todo, isUpdating }) => {
-    const { setTodoJson, setUpdatingTodo } = useTodolistContext()
+    const { setTodoJson, updatingTodoDispatch } = useTodolistContext()
 
     const toggleIsDone = () => {
       setTodoJson((prev) => {
@@ -22,13 +22,7 @@ const TodoBox = React.memo(
     }
 
     const toggleUpdate = () => {
-      setUpdatingTodo(
-        (prev) => {
-          if (!prev) { return todo }
-          if (prev.id === todo.id) { return null }
-          return todo
-        }
-      )
+      updatingTodoDispatch({type: "TOGGLE_UPDATE", todo})
     }
 
     return (

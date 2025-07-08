@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, createContext, useCallback } from "react"
+import { useState, useEffect, useContext, createContext, useCallback, useReducer } from "react"
 
 // ===== CONTEXT =====
 const TodolistContext = createContext(null)
@@ -73,7 +73,7 @@ const requestPut = async (baseUrl, todo) => {
 const useTodoApi = () => {
     const url = "http://localhost:3000/todo"
     const [todoJson, setTodoJson] = useState(null)
-    
+
     useEffect(
         () => {
             requestGet(url, setTodoJson)
@@ -104,5 +104,23 @@ const useQuoteApi = () => {
     return { quoteJson }
 }
 
+const updatingTodoReducer = (state, action) => {
+    switch (action.type) {
+        case "RESET":
+            return null
+        case "TOGGLE_UPDATE":
+            if (!state) { return action.todo }
+            if (state.id === action.todo.id) { return null }
+            return action.todo
+        default:
+            return state
+    }
+}
+const useTodoUpdate = () => {
+    const [updatingTodo, updatingTodoDispatch] = useReducer(updatingTodoReducer, null)
 
-export { useTodoApi, useQuoteApi, TodolistContext, useTodolistContext }
+    return { updatingTodo, updatingTodoDispatch }
+}
+
+
+export { useTodoApi, useQuoteApi, TodolistContext, useTodolistContext, useTodoUpdate }

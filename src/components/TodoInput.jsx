@@ -28,7 +28,7 @@ const TodoInput = ({ updatingTodo }) => {
         return copiedArray
       })
 
-      setUpdatingTodo(null)
+      updatingTodoDispatch({type: "RESET"})
     } else {
       setTodoJson((prev) => [...prev, todo])
     }

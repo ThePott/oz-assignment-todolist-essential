@@ -18,11 +18,9 @@ const TodoMany = ({ todoArray }) => {
   const { updatingTodo } = useTodolistContext()
 
   const isUpdatingArray = todoArray.map((todo) => updatingTodo ? todo.id === updatingTodo.id : false)
-  if (updatingTodo) {
-  }
+  
   return (
     <div className="todo-many">
-      {/* <Divider /> */}
       {todoArray.map((todo, index) => <TodoBox key={todo.id} todo={todo} isUpdating={isUpdatingArray[index]} />)}
     </div>
   )
