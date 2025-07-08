@@ -1,4 +1,14 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext, createContext } from "react"
+
+const TodolistContext = createContext(null)
+
+const useTodolistContext = () => {
+  const context = useContext(TodolistContext)
+  if (!context) {
+    throw new Error('Fruit components must be used within FruitBox')
+  }
+  return context
+}
 
 /** BODY <- JSON */
 const requestApi = async (setResponseJson, setResponseStatus, url, method, body) => {
@@ -35,8 +45,8 @@ const useApi = (destination, method = "GET", body = undefined) => {
         []
     )
 
-    return { responseJson, responseStatus }
+    return { responseJson, setResponseJson, responseStatus }
 
 }
 
-export { useApi }
+export { useApi, TodolistContext, useTodolistContext}

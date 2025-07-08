@@ -13,11 +13,11 @@
 
 # 지금 할 것
 3. CRUD part 2/2
-    todo box
     삭제
+    json 서버에도 보내야 함
 
 # 목록
 3. CRUD part 2/2
     추가
-    업데이트
+    클릭하면 업데이트
 4. Desktop 용으로 레이아웃 바꾸기
