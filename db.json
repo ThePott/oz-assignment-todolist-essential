@@ -1,19 +1,9 @@
 {
   "todo": [
     {
-      "id": "2",
-      "what": "똥 싸기",
+      "id": 1751960873918,
+      "what": "aaa",
       "isDone": false
-    },
-    {
-      "id": "1751956697427",
-      "what": "asdf",
-      "isDone": false
-    },
-    {
-      "id": "1",
-      "what": "밥 먹기",
-      "isDone": true
     }
   ]
 }

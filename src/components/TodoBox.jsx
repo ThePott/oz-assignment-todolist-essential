@@ -36,9 +36,9 @@ const TodoBox = React.memo(
     }
 
     return (
-      <div className={`todo ${isUpdating ? "updating" : ""}`} onClick={toggleUpdate}>
+      <div className={`todo ${isUpdating ? "updating" : ""}`}>
         <input type='checkbox' onChange={toggleIsDone} checked={todo.isDone} />
-        <p>{todo.what}</p>
+        <p onClick={toggleUpdate}>{todo.what}</p>
         <button className="delete" onClick={handleDelete}>삭제</button>
       </div>
     )

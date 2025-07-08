@@ -11,12 +11,9 @@ const App = () => {
 
   const { responseJson: quoteJson, responseStatus: quoteStatus } = useApi("QUOTE")
   const { responseJson: todoJson, setResponseJson: setTodoJson, responseStatus: todoStatus, putTodo, deleteTodo, postTodo } = useApi("TODO")
-  // console.log("---- put todo, delete todo:", putTodo, deleteTodo)
-
   
-
   return (
-    <TodolistContext.Provider value={{setTodoJson, putTodo, deleteTodo, postTodo, updatingTodo, setUpdatingTodo}}>
+    <TodolistContext.Provider value={{setTodoJson, putTodo, deleteTodo, postTodo, setUpdatingTodo}}>
       <div className="app-boundary">
         <Timer />
         <Quote quoteJson={quoteJson} quoteStatus={quoteStatus} />
