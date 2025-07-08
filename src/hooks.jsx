@@ -122,5 +122,20 @@ const useTodoUpdate = () => {
     return { updatingTodo, updatingTodoDispatch }
 }
 
+const searchReducer = (state, action) => {
+    switch (action.type) {
+        case "RESET":
+            return ""
+        case "SET":
+            return action.text
+        default:
+            return state
+    }
+}
+const useSearch = () => {
+    const [searchText, searchTextDispatch] = useReducer(searchReducer, "")
+    return { searchText, searchTextDispatch }
+}
 
-export { useTodoApi, useQuoteApi, TodolistContext, useTodolistContext, useTodoUpdate }
+
+export { useTodoApi, useQuoteApi, TodolistContext, useTodolistContext, useTodoUpdate, useSearch }
