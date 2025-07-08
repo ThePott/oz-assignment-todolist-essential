@@ -78,3 +78,20 @@ div.todo button:hover {
 div.todo button:active {
   background-color: hsl(0 0 10);
 }
+
+div.todo-input-section {
+  height: 48px;
+  display: flex;
+  /* gap: 12px; */
+  /* background-color: lightyellow; */
+}
+div.todo-input-section input {
+  flex-grow: 1;
+  padding: 8px;
+  font-size: 16px;
+}
+
+div.todo-input-section button {
+  padding: 12px;
+  margin : 
+}

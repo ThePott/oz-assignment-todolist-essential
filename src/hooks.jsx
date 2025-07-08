@@ -43,12 +43,21 @@ const simpleRequest = async (url, method, body) => {
             body: JSON.stringify(body)
         }
     )
-    const json = await response.json()
+
     if (!response.ok) {
-        console.log("---- invalid response:", response, json)
-         throw new Error()
-         }
+        console.log("---- invalid response:", response)
+        throw new Error()
+    }
+    const json = await response.json()
     return json
+}
+
+const requestPost = async (url, todo) => {
+    try {
+        await simpleRequest(url, "POST", todo)
+    } catch (error) {
+        console.error("---- ERROR:", error)
+    }
 }
 
 const requestDelete = async (baseUrl, todo) => {
@@ -59,7 +68,6 @@ const requestDelete = async (baseUrl, todo) => {
         console.error("---- ERROR:", error)
     }
 }
-
 
 const requestPut = async (baseUrl, todo) => {
     try {
@@ -84,22 +92,13 @@ const useApi = (destination, method = "GET", body = undefined) => {
         []
     )
 
-    const putTodo = useCallback(
-        (todo) => { 
-            console.log("---- started put?")
-            requestPut(url, todo) 
-        },
-        []
-    )
+    const putTodo = useCallback((todo) => { requestPut(url, todo) }, [])
 
-    const deleteTodo = useCallback(
-        (todo) => { 
-            console.log("---- started?")
-            requestDelete(url, todo)
-         }
-    )
+    const deleteTodo = useCallback((todo) => { requestDelete(url, todo) }, [])
 
-    return { responseJson, setResponseJson, responseStatus, putTodo, deleteTodo }
+    const postTodo = useCallback((todo) => { requestPost(url, todo) }, [])
+
+    return { responseJson, setResponseJson, responseStatus, putTodo, deleteTodo, postTodo }
 
 }
 
