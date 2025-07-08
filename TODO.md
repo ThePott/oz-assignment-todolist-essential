@@ -1,20 +1,12 @@
 # 과제 요구 사항
-1. CRUD with local + json server
-2. 현재 시각, 완료 시각
-3. 랜덤 명언
-4. useRef로 input 때문에 리렌더가 너무 일어나지 않게 하기
-5. **Custom Hook**
+1. 수정시, 수정 모달창 띄우기 / 배경 블러
+2. local storage에 todoArray 저장하기
+3. 이중 필터 
+    1. 완료 미완료 전체(라디오) 
+    2. korean-regexp
+4. state -> useReducer, dispatch
+5. 드래그 앤 드롭
 
-# 완료
-2. Layout
-4. 랜덤 명언
-1. CRUD
-    CRD
-
-# 지금 할 것
-3. CRUD
-    update
-
-# 목록
-4. Desktop 용으로 레이아웃 바꾸기
-5. API 로직 나눠야 함 인용문 / 서버
+# 할 것
+1. 코드 정리
+2. 레이아웃 정리
