@@ -10,11 +10,11 @@ import { useApi, TodolistContext } from "./hooks"
 
 const App = () => {
   const { responseJson: quoteJson, responseStatus: quoteStatus } = useApi("QUOTE")
-  const { responseJson: todoJson, setResponseJson: setTodoJson, responseStatus: todoStatus } = useApi("TODO")
-
+  const { responseJson: todoJson, setResponseJson: setTodoJson, responseStatus: todoStatus, putTodo, deleteTodo } = useApi("TODO")
+  // console.log("---- put todo, delete todo:", putTodo, deleteTodo)
 
   return (
-    <TodolistContext.Provider value={setTodoJson}>
+    <TodolistContext.Provider value={{setTodoJson, putTodo, deleteTodo}}>
       <div className="app-boundary">
         < Divider />< Divider />< Divider />
         <Timer />

@@ -1,7 +1,7 @@
 import { useTodolistContext } from "../hooks"
 
 const TodoBox = ({todo}) => {
-  const setTodoJson = useTodolistContext()
+  const {setTodoJson, putTodo, deleteTodo} = useTodolistContext()
 
   const toggleIsDone = () => {
     setTodoJson((prev) => {
@@ -10,6 +10,8 @@ const TodoBox = ({todo}) => {
       targetTodo.isDone = !targetTodo.isDone
       return copiedArray
     })
+
+    putTodo(todo)
   }
 
   const handleDelete = () => {
@@ -17,6 +19,8 @@ const TodoBox = ({todo}) => {
       const filteredArray = prev.filter((el) => el.id !== todo.id)
       return filteredArray
     })
+
+    deleteTodo(todo)
   }
 
   return (

@@ -35,8 +35,8 @@ const TodoSection = ({ todoJson }) => {
 
   return (
     <>
-      <TodoMany todoArray={doneArray} />
       <TodoMany todoArray={notYetArray} />
+      <TodoMany todoArray={doneArray} />
       <Divider />
     </>
   )
